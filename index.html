@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Konter Khalil - Pengisian Pulsa & Paket Data 24 Jam</title>
-    <!-- Tailwind CSS CDN untuk Tampilan Modern & Responsive -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -12,7 +11,7 @@
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         }
         .card-hover:hover {
-            transform: translateY(-5deg);
+            transform: translateY(-5px);
             transition: all 0.3s ease;
         }
     </style>
@@ -28,13 +27,14 @@
             </div>
             <div class="hidden md:flex space-x-6 text-sm font-medium">
                 <a href="#layanan" class="hover:text-amber-400 transition">Layanan</a>
-                <a href="#katalog" class="hover:text-amber-400 transition">Katalog & Diskon</a>
-                <a href="#pembayaran" class="hover:text-amber-400 transition">Metode Pembayaran</a>
-                <a href="#ketentuan" class="hover:text-amber-400 transition">Syarat & Ketentuan</a>
+                <a href="#katalog" class="hover:text-amber-400 transition">Katalog</a>
+                <a href="#pembayaran" class="hover:text-amber-400 transition">Pembayaran</a>
+                <a href="/faq.html" class="hover:text-amber-400 transition">FAQ</a>
+                <a href="/terms.html" class="hover:text-amber-400 transition">Terms & Conditions</a>
                 <a href="#kontak" class="hover:text-amber-400 transition">Kontak</a>
             </div>
-            <a href="https://wa.me/6281211007186" target="_blank" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold px-4 py-2 rounded-lg text-sm transition flex items-center gap-2">
-                <i class="fa-brands fa-whatsapp text-lg"></i> Beli Otomatis
+            <a href="#katalog" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold px-4 py-2 rounded-lg text-sm transition flex items-center gap-2">
+                <i class="fa-solid fa-cart-shopping"></i> Order Sekarang
             </a>
         </div>
     </nav>
@@ -44,13 +44,13 @@
         <div class="max-w-4xl mx-auto">
             <span class="bg-amber-500/20 text-amber-300 text-xs font-semibold px-3 py-1 rounded-full border border-amber-500/30">Layanan Otomatis 24 Jam</span>
             <h1 class="text-3xl md:text-5xl font-extrabold mt-4 mb-4 leading-tight">Pengisian Pulsa & Paket Data Super Cepat</h1>
-            <p class="text-gray-300 text-base md:text-lg mb-8">Dapatkan **Diskon Khusus 2% - 8%** untuk setiap transaksi otomatis via WhatsApp AI Bot. Transaksi mudah, aman, dan langsung terisi.</p>
+            <p class="text-gray-300 text-base md:text-lg mb-8">Dapatkan <strong>Diskon Khusus 2% - 8%</strong> untuk setiap pembelian otomatis langsung di website maupun via WhatsApp AI Bot. Pembayaran instan via QRIS & Virtual Account.</p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="https://wa.me/6281211007186?text=Halo" class="bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold px-6 py-3 rounded-xl shadow-lg transition">
-                    <i class="fa-solid fa-robot mr-2"></i> Transaksi via AI Bot (24 Jam)
+                <a href="#katalog" class="bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold px-6 py-3 rounded-xl shadow-lg transition">
+                    <i class="fa-solid fa-bolt mr-2"></i> Beli Langsung di Website
                 </a>
-                <a href="https://wa.me/6285820177770" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold px-6 py-3 rounded-xl border border-slate-700 transition">
-                    <i class="fa-solid fa-headset mr-2"></i> Customer Service (CS)
+                <a href="https://wa.me/6281211007186?text=Halo" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold px-6 py-3 rounded-xl border border-slate-700 transition">
+                    <i class="fa-brands fa-whatsapp mr-2 text-emerald-400"></i> Transaksi via WA Bot
                 </a>
             </div>
         </div>
@@ -91,12 +91,12 @@
         </div>
     </section>
 
-    <!-- KATALOG PRODUK & DISKON -->
+    <!-- KATALOG PRODUK & CHECKOUT -->
     <section id="katalog" class="py-12 bg-gray-100">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center mb-10">
                 <h2 class="text-2xl font-bold mb-2">Katalog Paket Favorit</h2>
-                <p class="text-sm text-gray-600">Harga belum termasuk **potongan diskon otomatis 2% - 8%** saat checkout via AI Bot.</p>
+                <p class="text-sm text-gray-600">Pilih paket di bawah untuk langsung melakukan checkout dan pembayaran QRIS otomatis.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-6">
@@ -108,11 +108,13 @@
                     </div>
                     <div class="p-5">
                         <div class="mb-4">
-                            <span class="text-xl font-bold text-gray-900">5 GB (28 Hari)</span>
+                            <span class="text-xl font-bold text-gray-900">XL Data 5 GB (28 Hari)</span>
                             <div class="text-sm text-gray-500 line-through">Rp 22.000</div>
                             <div class="text-lg font-extrabold text-emerald-600">Rp 20.900 <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-normal">Hemat 5%</span></div>
                         </div>
-                        <a href="https://wa.me/6281211007186?text=Beli%20XL%205GB" class="block text-center bg-slate-900 text-white font-semibold py-2 rounded-lg text-sm hover:bg-slate-800 transition">Beli Sekarang</a>
+                        <button onclick="openCheckout('XL5GB', 'XL Data 5 GB (28 Hari)', 20900)" class="w-full text-center bg-slate-900 text-white font-semibold py-2.5 rounded-lg text-sm hover:bg-slate-800 transition cursor-pointer">
+                            Beli Sekarang
+                        </button>
                     </div>
                 </div>
 
@@ -120,15 +122,17 @@
                 <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200">
                     <div class="bg-red-600 text-white px-4 py-3 font-bold flex justify-between items-center">
                         <span>TELKOMSEL</span>
-                        <span class="text-xs bg-red-800 px-2 py-1 rounded">Bulanan</span>
+                        <span class="text-xs bg-red-800 px-2 py-1 rounded">Reguler</span>
                     </div>
                     <div class="p-5">
                         <div class="mb-4">
-                            <span class="text-xl font-bold text-gray-900">Pulsa 50.000</span>
+                            <span class="text-xl font-bold text-gray-900">Pulsa Telkomsel 50.000</span>
                             <div class="text-sm text-gray-500 line-through">Rp 51.500</div>
                             <div class="text-lg font-extrabold text-emerald-600">Rp 49.950 <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-normal">Hemat 3%</span></div>
                         </div>
-                        <a href="https://wa.me/6281211007186?text=Beli%20Pulsa%20Telkomsel%2050rb" class="block text-center bg-slate-900 text-white font-semibold py-2 rounded-lg text-sm hover:bg-slate-800 transition">Beli Sekarang</a>
+                        <button onclick="openCheckout('TSEL50', 'Pulsa Telkomsel 50.000', 49950)" class="w-full text-center bg-slate-900 text-white font-semibold py-2.5 rounded-lg text-sm hover:bg-slate-800 transition cursor-pointer">
+                            Beli Sekarang
+                        </button>
                     </div>
                 </div>
 
@@ -140,54 +144,56 @@
                     </div>
                     <div class="p-5">
                         <div class="mb-4">
-                            <span class="text-xl font-bold text-gray-900">8 GB (1 Tahun)</span>
+                            <span class="text-xl font-bold text-gray-900">Tri Data 8 GB (1 Tahun)</span>
                             <div class="text-sm text-gray-500 line-through">Rp 38.000</div>
                             <div class="text-lg font-extrabold text-emerald-600">Rp 34.960 <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-normal">Hemat 8%</span></div>
                         </div>
-                        <a href="https://wa.me/6281211007186?text=Beli%20Tri%208GB" class="block text-center bg-slate-900 text-white font-semibold py-2 rounded-lg text-sm hover:bg-slate-800 transition">Beli Sekarang</a>
+                        <button onclick="openCheckout('TRI8GB', 'Tri Data 8 GB (1 Tahun)', 34960)" class="w-full text-center bg-slate-900 text-white font-semibold py-2.5 rounded-lg text-sm hover:bg-slate-800 transition cursor-pointer">
+                            Beli Sekarang
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- METODE PEMBAYARAN (SYARAT UTAMA IPAYMU) -->
+    <!-- METODE PEMBAYARAN -->
     <section id="pembayaran" class="py-12 max-w-6xl mx-auto px-4 text-center">
         <h2 class="text-2xl font-bold mb-3">Metode Pembayaran Resmi</h2>
-        <p class="text-sm text-gray-600 mb-8">Kami mendukung pembayaran instan otomatis via QRIS All Payment dan Transfer Bank.</p>
+        <p class="text-sm text-gray-600 mb-8">Mendukung pembayaran QRIS All Payment dan Virtual Account / Transfer Bank terintegrasi.</p>
 
         <div class="flex flex-wrap justify-center items-center gap-8 bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
             <div class="flex flex-col items-center">
                 <i class="fa-solid fa-qrcode text-5xl text-slate-800 mb-2"></i>
-                <span class="font-bold text-sm">QRIS Statis & Dinamis</span>
-                <span class="text-xs text-gray-500">BCA, Mandiri, BRI, GoPay, Dana, OVO, ShopeePay</span>
+                <span class="font-bold text-sm">QRIS All Payment</span>
+                <span class="text-xs text-gray-500">BCA, Mandiri, BRI, BNI, GoPay, Dana, OVO, ShopeePay</span>
             </div>
             <div class="h-12 w-px bg-gray-300 hidden md:block"></div>
             <div class="flex flex-col items-center">
                 <i class="fa-solid fa-building-columns text-5xl text-blue-700 mb-2"></i>
-                <span class="font-bold text-sm">Transfer Bank BRI</span>
-                <span class="text-xs text-gray-500">No. Rek: 4516-0104-4187-530 a.n Farid Rahman</span>
+                <span class="font-bold text-sm">Virtual Account & Transfer Bank</span>
+                <span class="text-xs text-gray-500">Terintegrasi Payment Gateway iPaymu</span>
             </div>
         </div>
     </section>
 
-    <!-- SYARAT & KETENTUAN (DIBUTUHKAN IPAYMU ACC) -->
+    <!-- RINGKASAN KEBIJAKAN & TAUTAN DOKUMEN WAJIB -->
     <section id="ketentuan" class="py-12 bg-white">
         <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-2xl font-bold text-center mb-6">Syarat & Ketentuan Layanan</h2>
-            <div class="space-y-4 text-sm text-gray-600">
-                <div class="p-4 bg-gray-50 rounded-lg">
-                    <h4 class="font-bold text-gray-800 mb-1">1. Pengisian Nomor HP</h4>
-                    <p>Pelanggan wajib memasukkan nomor HP tujuan dengan benar. Kesalahan pengisian nomor HP oleh pelanggan sepenuhnya di luar tanggung jawab Konter Khalil.</p>
-                </div>
-                <div class="p-4 bg-gray-50 rounded-lg">
-                    <h4 class="font-bold text-gray-800 mb-1">2. Pembayaran Otomatis</h4>
-                    <p>Pembayaran wajib dilakukan sesuai dengan kode unik / angka nominal akhir yang tertera pada rincian konfirmasi agar sistem pembayaran otomatis dapat memproses pesanan dengan cepat.</p>
-                </div>
-                <div class="p-4 bg-gray-50 rounded-lg">
-                    <h4 class="font-bold text-gray-800 mb-1">3. Kebijakan Refund / Transaksi Gagal</h4>
-                    <p>Jika transaksi dinyatakan gagal oleh sistem/supplier (stok habis/gangguan jaringan), saldo pelanggan akan dikembalikan 100% atau diproses ulang melalui layanan Customer Service manual kami.</p>
-                </div>
+            <h2 class="text-2xl font-bold text-center mb-6">Informasi & Kebijakan Layanan</h2>
+            <div class="grid md:grid-cols-3 gap-4 text-sm">
+                <a href="/faq.html" class="p-5 bg-gray-50 hover:bg-blue-50 border border-gray-200 rounded-xl transition block">
+                    <h4 class="font-bold text-blue-700 mb-1"><i class="fa-solid fa-circle-question mr-1"></i> FAQ</h4>
+                    <p class="text-gray-600 text-xs">Pertanyaan umum seputar cara pembelian, estimasi masuk, dan jam layanan.</p>
+                </a>
+                <a href="/refund.html" class="p-5 bg-gray-50 hover:bg-blue-50 border border-gray-200 rounded-xl transition block">
+                    <h4 class="font-bold text-blue-700 mb-1"><i class="fa-solid fa-rotate-left mr-1"></i> Refund Policy</h4>
+                    <p class="text-gray-600 text-xs">Ketentuan pengembalian dana 100% apabila transaksi gagal dari sistem/operator.</p>
+                </a>
+                <a href="/terms.html" class="p-5 bg-gray-50 hover:bg-blue-50 border border-gray-200 rounded-xl transition block">
+                    <h4 class="font-bold text-blue-700 mb-1"><i class="fa-solid fa-file-contract mr-1"></i> Terms & Conditions</h4>
+                    <p class="text-gray-600 text-xs">Syarat dan ketentuan penggunaan layanan transaksi digital di Konter Khalil.</p>
+                </a>
             </div>
         </div>
     </section>
@@ -196,20 +202,20 @@
     <section id="kontak" class="py-12 gradient-bg text-white">
         <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
             <div>
-                <h2 class="text-2xl font-bold mb-4">Lokasi Konter Fisik Kami</h2>
-                <p class="text-gray-300 mb-6 text-sm">Selain melayani transaksi digital otomatis 24 jam, kami juga memiliki outlet konter fisik resmi yang melayani masyarakat sekitar.</p>
+                <h2 class="text-2xl font-bold mb-4">Lokasi Usaha & Kontak Resmi</h2>
+                <p class="text-gray-300 mb-6 text-sm">Selain melayani transaksi digital otomatis 24 jam, kami memiliki outlet konter fisik resmi yang terdaftar.</p>
                 
                 <div class="space-y-3 text-sm">
                     <div class="flex items-start gap-3">
                         <i class="fa-solid fa-store text-amber-400 mt-1"></i>
                         <div>
-                            <strong>Nama Toko:</strong> KONTER KHALIL (KhalilPay)
+                            <strong>Nama Usaha:</strong> KONTER KHALIL
                         </div>
                     </div>
                     <div class="flex items-start gap-3">
                         <i class="fa-solid fa-location-dot text-amber-400 mt-1"></i>
                         <div>
-                            <strong>Alamat:</strong> Jl. Sekolah Islam No. 71, Negara, Kabupaten Hulu Sungai Selatan, Kalimantan Selatan.
+                            <strong>Alamat Bisnis:</strong> JL SEKOLAH ISLAM NO 71, Desa Sungai Pinang Kec. Daha Selatan, Kab. Hulu Sungai Selatan, Provinsi Kalimantan Selatan
                         </div>
                     </div>
                     <div class="flex items-start gap-3">
@@ -231,16 +237,129 @@
             <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center">
                 <i class="fa-solid fa-shield-halved text-5xl text-amber-400 mb-4"></i>
                 <h3 class="text-xl font-bold mb-2">Jaminan Keamanan Transaksi</h3>
-                <p class="text-xs text-gray-400 mb-6">Seluruh alur data transaksi dienkripsi dan diproses secara otomatis oleh sistem Host-to-Host terintegrasi.</p>
-                <a href="https://wa.me/6285820177770" class="inline-block bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold px-6 py-2.5 rounded-lg text-sm transition">Hubungi Admin CS</a>
+                <p class="text-xs text-gray-400 mb-6">Seluruh alur pembayaran online terintegrasi dengan sistem pembayaran otomatis dan diproses 24 jam.</p>
+                <a href="https://wa.me/6285820177770" target="_blank" class="inline-block bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold px-6 py-2.5 rounded-lg text-sm transition">Hubungi Admin CS</a>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-slate-950 text-gray-500 py-6 text-center text-xs">
-        <p>&copy; 2026 KONTER KHALIL. All Rights Reserved. Powered by Host-to-Host Automation.</p>
+    <footer class="bg-slate-950 text-gray-400 py-8 text-center text-xs">
+        <div class="max-w-6xl mx-auto px-4 space-y-3">
+            <div class="flex flex-wrap justify-center gap-4 text-gray-300 font-medium">
+                <a href="/" class="hover:text-amber-400">Beranda</a>
+                <span>|</span>
+                <a href="/faq.html" class="hover:text-amber-400">FAQ</a>
+                <span>|</span>
+                <a href="/refund.html" class="hover:text-amber-400">Refund Policy</a>
+                <span>|</span>
+                <a href="/terms.html" class="hover:text-amber-400">Terms & Conditions</a>
+            </div>
+            <p>JL SEKOLAH ISLAM NO 71, Desa Sungai Pinang Kec. Daha Selatan, Kab. Hulu Sungai Selatan, Provinsi Kalimantan Selatan</p>
+            <p class="text-gray-500">&copy; 2026 KONTER KHALIL. All Rights Reserved.</p>
+        </div>
     </footer>
+
+    <!-- MODAL CHECKOUT QRIS STATIS -->
+    <div id="checkoutModal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                <h3 class="text-lg font-bold text-gray-900">Checkout Pembayaran</h3>
+                <button onclick="closeCheckout()" class="text-gray-400 hover:text-gray-700 text-xl font-bold">&times;</button>
+            </div>
+
+            <!-- STEP 1: FORM INPUT -->
+            <form id="checkoutForm" onsubmit="generateQris(event)" class="space-y-4">
+                <input type="hidden" id="prodCode">
+                <input type="hidden" id="prodPrice">
+                <div class="bg-gray-50 p-3 rounded-lg border border-gray-200">
+                    <div class="text-xs text-gray-500">Produk Dipilih:</div>
+                    <div id="prodNameDisplay" class="font-bold text-gray-900"></div>
+                    <div id="prodPriceDisplay" class="text-emerald-600 font-extrabold text-lg"></div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Nomor HP Tujuan Pengisian *</label>
+                    <input type="tel" id="targetPhone" required placeholder="Contoh: 081234567890" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-600">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Nama Pembeli *</label>
+                    <input type="text" id="buyerName" required placeholder="Masukkan nama Anda" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-600">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl text-sm transition cursor-pointer">
+                    Buat Tagihan QRIS
+                </button>
+            </form>
+
+            <!-- STEP 2: TAMPILAN QRIS STATIS + KODE UNIK -->
+            <div id="qrisResult" class="hidden text-center space-y-3">
+                <div class="bg-amber-50 border border-amber-300 rounded-xl p-3 text-xs text-amber-900">
+                    <strong>PENTING:</strong> Scan & transfer sesuai nominal hingga <strong>3 digit terakhir</strong> agar sistem otomatis mendeteksi pembayaran Anda.
+                </div>
+                <div class="text-xs text-gray-500">ID Invoice: <span id="resInvoice" class="font-bold text-gray-800"></span></div>
+                <div class="text-xs text-gray-500">Nomor Tujuan: <span id="resPhone" class="font-bold text-gray-800"></span></div>
+                <div class="bg-gray-100 py-2 px-4 rounded-xl inline-block">
+                    <div class="text-xs text-gray-500">Total yang Harus Dibayar:</div>
+                    <div id="resTotal" class="text-2xl font-extrabold text-blue-700"></div>
+                </div>
+                <div class="flex justify-center">
+                    <img src="https://res.cloudinary.com/aetypyca/image/upload/Khalilpay.png" alt="QRIS Konter Khalil" class="w-56 h-56 object-contain border rounded-xl p-2 bg-white shadow-sm">
+                </div>
+                <p class="text-xs text-gray-500">Scan menggunakan Dana, OVO, GoPay, ShopeePay, atau Mobile Banking apa saja.</p>
+                <a id="waConfirmLink" href="#" target="_blank" class="block w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-xs transition">
+                    <i class="fa-brands fa-whatsapp mr-1"></i> Konfirmasi Bukti Bayar via WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openCheckout(code, name, price) {
+            document.getElementById('prodCode').value = code;
+            document.getElementById('prodPrice').value = price;
+            document.getElementById('prodNameDisplay').textContent = name;
+            document.getElementById('prodPriceDisplay').textContent = 'Rp ' + price.toLocaleString('id-ID');
+            
+            document.getElementById('checkoutForm').classList.remove('hidden');
+            document.getElementById('qrisResult').classList.add('hidden');
+
+            document.getElementById('checkoutModal').classList.remove('hidden');
+            document.getElementById('checkoutModal').classList.add('flex');
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkoutModal').classList.add('hidden');
+            document.getElementById('checkoutModal').classList.remove('flex');
+        }
+
+        function generateQris(e) {
+            e.preventDefault();
+            const prodName = document.getElementById('prodNameDisplay').textContent;
+            const baseAmount = parseInt(document.getElementById('prodPrice').value);
+            const targetPhone = document.getElementById('targetPhone').value;
+            const buyerName = document.getElementById('buyerName').value;
+
+            const kodeUnik = Math.floor(Math.random() * 299) + 1;
+            const totalBayar = baseAmount + kodeUnik;
+            const invoiceId = "KK-" + Date.now().toString().slice(-6);
+
+            document.getElementById('checkoutForm').classList.add('hidden');
+            document.getElementById('resInvoice').textContent = invoiceId;
+            document.getElementById('resPhone').textContent = targetPhone;
+            document.getElementById('resTotal').textContent = 'Rp ' + totalBayar.toLocaleString('id-ID');
+
+            const waText = encodeURIComponent(
+                `Halo Admin Konter Khalil, saya sudah bayar QRIS:\n` +
+                `Invoice: ${invoiceId}\n` +
+                `Nama: ${buyerName}\n` +
+                `Produk: ${prodName}\n` +
+                `Nomor Tujuan: ${targetPhone}\n` +
+                `Total Transfer: Rp ${totalBayar.toLocaleString('id-ID')}`
+            );
+            document.getElementById('waConfirmLink').href = `https://wa.me/6281211007186?text=${waText}`;
+
+            document.getElementById('qrisResult').classList.remove('hidden');
+        }
+    </script>
 
 </body>
 </html>
