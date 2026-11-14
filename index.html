@@ -1,365 +1,483 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Konter Khalil - Pengisian Pulsa & Paket Data 24 Jam</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .gradient-bg {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-        }
-        .card-hover:hover {
-            transform: translateY(-5px);
-            transition: all 0.3s ease;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Konter Khalil - Top Up Pulsa & Paket Data Otomatis 24 Jam</title>
+  <style>
+    :root {
+      --primary: #0f766e;
+      --primary-dark: #115e59;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      padding: 24px 16px 40px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      margin-bottom: 4px;
+    }
+
+    header p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 720px;
+      margin: -24px auto 32px;
+      padding: 0 16px;
+    }
+
+    /* Box Input Nomor HP */
+    .order-box {
+      background: var(--card);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      margin-bottom: 20px;
+    }
+
+    .order-box label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .order-box input {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 1.05rem;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .order-box input:focus {
+      border-color: var(--primary);
+    }
+
+    .operator-badge {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .operator-badge strong {
+      color: var(--primary);
+    }
+
+    /* Filter Tabs Operator */
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+
+    .tab-btn {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      white-space: nowrap;
+      color: var(--text);
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Grid Katalog Produk */
+    .katalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 12px;
+    }
+
+    .card-produk {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .card-produk:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+    }
+
+    .provider-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .nama-paket {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .harga-asli {
+      text-decoration: line-through;
+      color: #94a3b8;
+      font-size: 0.8rem;
+    }
+
+    .diskon-tag {
+      background: #dcfce7;
+      color: #15803d;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 4px;
+    }
+
+    .harga-jual {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 4px 0 12px;
+    }
+
+    .btn-beli {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-beli:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-beli:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    /* Status Alert (Saat kembali dari iPaymu) */
+    .status-banner {
+      display: none;
+      padding: 14px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .status-success {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+
+    .status-cancel {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+    }
+
+    /* Footer Merchant (Penting untuk verifikasi PG iPaymu) */
+    footer {
+      text-align: center;
+      padding: 24px 16px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body>
 
-    <!-- NAVIGATION BAR -->
-    <nav class="bg-slate-900 text-white sticky top-0 z-50 shadow-md">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <i class="fa-solid font-bold fa-bolt text-amber-400 text-2xl"></i>
-                <span class="text-xl font-bold tracking-wide">KONTER KHALIL</span>
-            </div>
-            <div class="hidden md:flex space-x-6 text-sm font-medium">
-                <a href="#layanan" class="hover:text-amber-400 transition">Layanan</a>
-                <a href="#katalog" class="hover:text-amber-400 transition">Katalog</a>
-                <a href="#pembayaran" class="hover:text-amber-400 transition">Pembayaran</a>
-                <a href="/faq.html" class="hover:text-amber-400 transition">FAQ</a>
-                <a href="/terms.html" class="hover:text-amber-400 transition">Terms & Conditions</a>
-                <a href="#kontak" class="hover:text-amber-400 transition">Kontak</a>
-            </div>
-            <a href="#katalog" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold px-4 py-2 rounded-lg text-sm transition flex items-center gap-2">
-                <i class="fa-solid fa-cart-shopping"></i> Order Sekarang
-            </a>
-        </div>
-    </nav>
+  <!-- HEADER -->
+  <header>
+    <h1>Konter Khalil</h1>
+    <p>Isi Pulsa & Paket Data All Operator Otomatis 24 Jam via QRIS</p>
+  </header>
 
-    <!-- HERO SECTION -->
-    <header class="gradient-bg text-white py-16 px-4 text-center">
-        <div class="max-w-4xl mx-auto">
-            <span class="bg-amber-500/20 text-amber-300 text-xs font-semibold px-3 py-1 rounded-full border border-amber-500/30">Layanan Otomatis 24 Jam</span>
-            <h1 class="text-3xl md:text-5xl font-extrabold mt-4 mb-4 leading-tight">Pengisian Pulsa & Paket Data Super Cepat</h1>
-            <p class="text-gray-300 text-base md:text-lg mb-8">Dapatkan <strong>Diskon Khusus 2% - 8%</strong> untuk setiap pembelian otomatis langsung di website maupun via WhatsApp AI Bot. Pembayaran instan via QRIS & Virtual Account.</p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="#katalog" class="bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold px-6 py-3 rounded-xl shadow-lg transition">
-                    <i class="fa-solid fa-bolt mr-2"></i> Beli Langsung di Website
-                </a>
-                <a href="https://wa.me/6281211007186?text=Halo" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold px-6 py-3 rounded-xl border border-slate-700 transition">
-                    <i class="fa-brands fa-whatsapp mr-2 text-emerald-400"></i> Transaksi via WA Bot
-                </a>
-            </div>
-        </div>
-    </header>
+  <div class="container">
+    <!-- NOTIFIKASI STATUS REDIRECT DARI IPAYMU -->
+    <div id="status-banner" class="status-banner"></div>
 
-    <!-- LAYANAN UTAMA -->
-    <section id="layanan" class="py-12 max-w-6xl mx-auto px-4">
-        <h2 class="text-2xl font-bold text-center mb-8">Layanan Kami</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center card-hover">
-                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
-                    <i class="fa-solid fa-mobile-screen-button"></i>
-                </div>
-                <h3 class="font-bold mb-1">Paket Data & Pulsa</h3>
-                <p class="text-xs text-gray-500">Telkomsel, XL, Tri, Indosat, Axis, Smartfren, By.U</p>
-            </div>
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center card-hover">
-                <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
-                    <i class="fa-solid fa-bolt"></i>
-                </div>
-                <h3 class="font-bold mb-1">Token PLN</h3>
-                <p class="text-xs text-gray-500">Isi ulang token listrik prabayar fleksibel & cepat</p>
-            </div>
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center card-hover">
-                <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
-                    <i class="fa-solid fa-wallet"></i>
-                </div>
-                <h3 class="font-bold mb-1">Top Up E-Wallet</h3>
-                <p class="text-xs text-gray-500">Dana, OVO, GoPay, ShopeePay, LinkAja</p>
-            </div>
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center card-hover">
-                <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
-                    <i class="fa-solid fa-users"></i>
-                </div>
-                <h3 class="font-bold mb-1">Jaringan Agen/Reseller</h3>
-                <p class="text-xs text-gray-500">Layanan khusus toko mitra dengan komisi mingguan</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- KATALOG PRODUK & CHECKOUT -->
-    <section id="katalog" class="py-12 bg-gray-100">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-10">
-                <h2 class="text-2xl font-bold mb-2">Katalog Paket Favorit</h2>
-                <p class="text-sm text-gray-600">Pilih paket di bawah untuk langsung melakukan checkout dan pembayaran QRIS otomatis.</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-6">
-                <!-- Card 1 -->
-                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200">
-                    <div class="bg-blue-600 text-white px-4 py-3 font-bold flex justify-between items-center">
-                        <span>XL AXIATA</span>
-                        <span class="text-xs bg-blue-800 px-2 py-1 rounded">28 Hari</span>
-                    </div>
-                    <div class="p-5">
-                        <div class="mb-4">
-                            <span class="text-xl font-bold text-gray-900">XL Data 5 GB (28 Hari)</span>
-                            <div class="text-sm text-gray-500 line-through">Rp 22.000</div>
-                            <div class="text-lg font-extrabold text-emerald-600">Rp 20.900 <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-normal">Hemat 5%</span></div>
-                        </div>
-                        <button onclick="openCheckout('XL5GB', 'XL Data 5 GB (28 Hari)', 20900)" class="w-full text-center bg-slate-900 text-white font-semibold py-2.5 rounded-lg text-sm hover:bg-slate-800 transition cursor-pointer">
-                            Beli Sekarang
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200">
-                    <div class="bg-red-600 text-white px-4 py-3 font-bold flex justify-between items-center">
-                        <span>TELKOMSEL</span>
-                        <span class="text-xs bg-red-800 px-2 py-1 rounded">Reguler</span>
-                    </div>
-                    <div class="p-5">
-                        <div class="mb-4">
-                            <span class="text-xl font-bold text-gray-900">Pulsa Telkomsel 50.000</span>
-                            <div class="text-sm text-gray-500 line-through">Rp 51.500</div>
-                            <div class="text-lg font-extrabold text-emerald-600">Rp 49.950 <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-normal">Hemat 3%</span></div>
-                        </div>
-                        <button onclick="openCheckout('TSEL50', 'Pulsa Telkomsel 50.000', 49950)" class="w-full text-center bg-slate-900 text-white font-semibold py-2.5 rounded-lg text-sm hover:bg-slate-800 transition cursor-pointer">
-                            Beli Sekarang
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200">
-                    <div class="bg-orange-500 text-white px-4 py-3 font-bold flex justify-between items-center">
-                        <span>TRI (3)</span>
-                        <span class="text-xs bg-orange-700 px-2 py-1 rounded">1 Tahun</span>
-                    </div>
-                    <div class="p-5">
-                        <div class="mb-4">
-                            <span class="text-xl font-bold text-gray-900">Tri Data 8 GB (1 Tahun)</span>
-                            <div class="text-sm text-gray-500 line-through">Rp 38.000</div>
-                            <div class="text-lg font-extrabold text-emerald-600">Rp 34.960 <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-normal">Hemat 8%</span></div>
-                        </div>
-                        <button onclick="openCheckout('TRI8GB', 'Tri Data 8 GB (1 Tahun)', 34960)" class="w-full text-center bg-slate-900 text-white font-semibold py-2.5 rounded-lg text-sm hover:bg-slate-800 transition cursor-pointer">
-                            Beli Sekarang
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- METODE PEMBAYARAN -->
-    <section id="pembayaran" class="py-12 max-w-6xl mx-auto px-4 text-center">
-        <h2 class="text-2xl font-bold mb-3">Metode Pembayaran Resmi</h2>
-        <p class="text-sm text-gray-600 mb-8">Mendukung pembayaran QRIS All Payment dan Virtual Account / Transfer Bank terintegrasi.</p>
-
-        <div class="flex flex-wrap justify-center items-center gap-8 bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
-            <div class="flex flex-col items-center">
-                <i class="fa-solid fa-qrcode text-5xl text-slate-800 mb-2"></i>
-                <span class="font-bold text-sm">QRIS All Payment</span>
-                <span class="text-xs text-gray-500">BCA, Mandiri, BRI, BNI, GoPay, Dana, OVO, ShopeePay</span>
-            </div>
-            <div class="h-12 w-px bg-gray-300 hidden md:block"></div>
-            <div class="flex flex-col items-center">
-                <i class="fa-solid fa-building-columns text-5xl text-blue-700 mb-2"></i>
-                <span class="font-bold text-sm">Virtual Account & Transfer Bank</span>
-                <span class="text-xs text-gray-500">Terintegrasi Payment Gateway iPaymu</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- RINGKASAN KEBIJAKAN & TAUTAN DOKUMEN WAJIB -->
-    <section id="ketentuan" class="py-12 bg-white">
-        <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-2xl font-bold text-center mb-6">Informasi & Kebijakan Layanan</h2>
-            <div class="grid md:grid-cols-3 gap-4 text-sm">
-                <a href="/faq.html" class="p-5 bg-gray-50 hover:bg-blue-50 border border-gray-200 rounded-xl transition block">
-                    <h4 class="font-bold text-blue-700 mb-1"><i class="fa-solid fa-circle-question mr-1"></i> FAQ</h4>
-                    <p class="text-gray-600 text-xs">Pertanyaan umum seputar cara pembelian, estimasi masuk, dan jam layanan.</p>
-                </a>
-                <a href="/refund.html" class="p-5 bg-gray-50 hover:bg-blue-50 border border-gray-200 rounded-xl transition block">
-                    <h4 class="font-bold text-blue-700 mb-1"><i class="fa-solid fa-rotate-left mr-1"></i> Refund Policy</h4>
-                    <p class="text-gray-600 text-xs">Ketentuan pengembalian dana 100% apabila transaksi gagal dari sistem/operator.</p>
-                </a>
-                <a href="/terms.html" class="p-5 bg-gray-50 hover:bg-blue-50 border border-gray-200 rounded-xl transition block">
-                    <h4 class="font-bold text-blue-700 mb-1"><i class="fa-solid fa-file-contract mr-1"></i> Terms & Conditions</h4>
-                    <p class="text-gray-600 text-xs">Syarat dan ketentuan penggunaan layanan transaksi digital di Konter Khalil.</p>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- INFORMASI TOKO FISIK & KONTAK -->
-    <section id="kontak" class="py-12 gradient-bg text-white">
-        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
-            <div>
-                <h2 class="text-2xl font-bold mb-4">Lokasi Usaha & Kontak Resmi</h2>
-                <p class="text-gray-300 mb-6 text-sm">Selain melayani transaksi digital otomatis 24 jam, kami memiliki outlet konter fisik resmi yang terdaftar.</p>
-                
-                <div class="space-y-3 text-sm">
-                    <div class="flex items-start gap-3">
-                        <i class="fa-solid fa-store text-amber-400 mt-1"></i>
-                        <div>
-                            <strong>Nama Usaha:</strong> KONTER KHALIL
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <i class="fa-solid fa-location-dot text-amber-400 mt-1"></i>
-                        <div>
-                            <strong>Alamat Bisnis:</strong> JL SEKOLAH ISLAM NO 71, Desa Sungai Pinang Kec. Daha Selatan, Kab. Hulu Sungai Selatan, Provinsi Kalimantan Selatan
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <i class="fa-solid fa-user-check text-amber-400 mt-1"></i>
-                        <div>
-                            <strong>Pemilik Bisnis:</strong> Farid Rahman
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <i class="fa-brands fa-whatsapp text-amber-400 mt-1"></i>
-                        <div>
-                            <strong>WA Bot AI (24 Jam):</strong> 0812-1100-7186<br>
-                            <strong>Layanan CS Manual:</strong> 0858-2017-7770
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center">
-                <i class="fa-solid fa-shield-halved text-5xl text-amber-400 mb-4"></i>
-                <h3 class="text-xl font-bold mb-2">Jaminan Keamanan Transaksi</h3>
-                <p class="text-xs text-gray-400 mb-6">Seluruh alur pembayaran online terintegrasi dengan sistem pembayaran otomatis dan diproses 24 jam.</p>
-                <a href="https://wa.me/6285820177770" target="_blank" class="inline-block bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold px-6 py-2.5 rounded-lg text-sm transition">Hubungi Admin CS</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="bg-slate-950 text-gray-400 py-8 text-center text-xs">
-        <div class="max-w-6xl mx-auto px-4 space-y-3">
-            <div class="flex flex-wrap justify-center gap-4 text-gray-300 font-medium">
-                <a href="/" class="hover:text-amber-400">Beranda</a>
-                <span>|</span>
-                <a href="/faq.html" class="hover:text-amber-400">FAQ</a>
-                <span>|</span>
-                <a href="/refund.html" class="hover:text-amber-400">Refund Policy</a>
-                <span>|</span>
-                <a href="/terms.html" class="hover:text-amber-400">Terms & Conditions</a>
-            </div>
-            <p>JL SEKOLAH ISLAM NO 71, Desa Sungai Pinang Kec. Daha Selatan, Kab. Hulu Sungai Selatan, Provinsi Kalimantan Selatan</p>
-            <p class="text-gray-500">&copy; 2026 KONTER KHALIL. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <!-- MODAL CHECKOUT QRIS STATIS -->
-    <div id="checkoutModal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center border-b pb-3 mb-4">
-                <h3 class="text-lg font-bold text-gray-900">Checkout Pembayaran</h3>
-                <button onclick="closeCheckout()" class="text-gray-400 hover:text-gray-700 text-xl font-bold">&times;</button>
-            </div>
-
-            <!-- STEP 1: FORM INPUT -->
-            <form id="checkoutForm" onsubmit="generateQris(event)" class="space-y-4">
-                <input type="hidden" id="prodCode">
-                <input type="hidden" id="prodPrice">
-                <div class="bg-gray-50 p-3 rounded-lg border border-gray-200">
-                    <div class="text-xs text-gray-500">Produk Dipilih:</div>
-                    <div id="prodNameDisplay" class="font-bold text-gray-900"></div>
-                    <div id="prodPriceDisplay" class="text-emerald-600 font-extrabold text-lg"></div>
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-700 mb-1">Nomor HP Tujuan Pengisian *</label>
-                    <input type="tel" id="targetPhone" required placeholder="Contoh: 081234567890" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-600">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-700 mb-1">Nama Pembeli *</label>
-                    <input type="text" id="buyerName" required placeholder="Masukkan nama Anda" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-600">
-                </div>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl text-sm transition cursor-pointer">
-                    Buat Tagihan QRIS
-                </button>
-            </form>
-
-            <!-- STEP 2: TAMPILAN QRIS STATIS + KODE UNIK -->
-            <div id="qrisResult" class="hidden text-center space-y-3">
-                <div class="bg-amber-50 border border-amber-300 rounded-xl p-3 text-xs text-amber-900">
-                    <strong>PENTING:</strong> Scan & transfer sesuai nominal hingga <strong>3 digit terakhir</strong> agar sistem otomatis mendeteksi pembayaran Anda.
-                </div>
-                <div class="text-xs text-gray-500">ID Invoice: <span id="resInvoice" class="font-bold text-gray-800"></span></div>
-                <div class="text-xs text-gray-500">Nomor Tujuan: <span id="resPhone" class="font-bold text-gray-800"></span></div>
-                <div class="bg-gray-100 py-2 px-4 rounded-xl inline-block">
-                    <div class="text-xs text-gray-500">Total yang Harus Dibayar:</div>
-                    <div id="resTotal" class="text-2xl font-extrabold text-blue-700"></div>
-                </div>
-                <div class="flex justify-center">
-                    <img src="https://res.cloudinary.com/aetypyca/image/upload/Khalilpay.png" alt="QRIS Konter Khalil" class="w-56 h-56 object-contain border rounded-xl p-2 bg-white shadow-sm">
-                </div>
-                <p class="text-xs text-gray-500">Scan menggunakan Dana, OVO, GoPay, ShopeePay, atau Mobile Banking apa saja.</p>
-                <a id="waConfirmLink" href="#" target="_blank" class="block w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-xs transition">
-                    <i class="fa-brands fa-whatsapp mr-1"></i> Konfirmasi Bukti Bayar via WhatsApp
-                </a>
-            </div>
-        </div>
+    <!-- 1. INPUT NOMOR HP TUJUAN -->
+    <div class="order-box">
+      <label for="nohp">1. Masukkan Nomor HP Tujuan</label>
+      <div class="input-group">
+        <input 
+          type="tel" 
+          id="nohp" 
+          placeholder="Contoh: 081234567890" 
+          oninput="filterKatalogByNomor()" 
+        />
+      </div>
+      <span id="info-operator" class="operator-badge">
+        Ketik nomor HP untuk mendeteksi operator secara otomatis
+      </span>
     </div>
 
-    <script>
-        function openCheckout(code, name, price) {
-            document.getElementById('prodCode').value = code;
-            document.getElementById('prodPrice').value = price;
-            document.getElementById('prodNameDisplay').textContent = name;
-            document.getElementById('prodPriceDisplay').textContent = 'Rp ' + price.toLocaleString('id-ID');
-            
-            document.getElementById('checkoutForm').classList.remove('hidden');
-            document.getElementById('qrisResult').classList.add('hidden');
+    <!-- FILTER MANUAL PROVIDER -->
+    <div class="filter-tabs" id="filter-tabs">
+      <button class="tab-btn active" onclick="pilihTabOperator('ALL', this)">Semua</button>
+      <button class="tab-btn" onclick="pilihTabOperator('TELKOMSEL', this)">Telkomsel</button>
+      <button class="tab-btn" onclick="pilihTabOperator('BYU', this)">by.U</button>
+      <button class="tab-btn" onclick="pilihTabOperator('IM3', this)">IM3 / Indosat</button>
+      <button class="tab-btn" onclick="pilihTabOperator('TRI', this)">Tri</button>
+      <button class="tab-btn" onclick="pilihTabOperator('XL', this)">XL</button>
+      <button class="tab-btn" onclick="pilihTabOperator('AXIS', this)">Axis</button>
+      <button class="tab-btn" onclick="pilihTabOperator('SMARTFREN', this)">Smartfren</button>
+    </div>
 
-            document.getElementById('checkoutModal').classList.remove('hidden');
-            document.getElementById('checkoutModal').classList.add('flex');
+    <!-- 2. WADAH KATALOG PRODUK -->
+    <div id="katalog-container" class="katalog-grid">
+      <p>Memuat daftar harga terbaru...</p>
+    </div>
+  </div>
+
+  <!-- FOOTER INFORMASI LAYANAN -->
+  <footer>
+    <p><strong>Konter Khalil Digital</strong> — Layanan Top Up Pulsa & Paket Data H2H</p>
+    <p>Metode Pembayaran Resmi: QRIS (Mendukung Dana, OVO, GoPay, ShopeePay & Mobile Banking)</p>
+    <p style="margin-top: 6px;">
+      Butuh bantuan transaksi? Hubungi CS WhatsApp: 
+      <a href="https://wa.me/6285820177770" target="_blank">0858-2017-7770</a>
+    </p>
+  </footer>
+
+  <!-- 3. SCRIPT PENGAMBIL KATALOG & CHECKOUT IPAYMU -->
+  <script>
+    const API_BASE = "https://h2h.konterkhalil.my.id";
+    let semuaProduk = [];
+
+    // Cek parameter URL setelah kembali dari halaman pembayaran iPaymu
+    function cekStatusRedirect() {
+      const params = new URLSearchParams(window.location.search);
+      const status = params.get("status");
+      const banner = document.getElementById("status-banner");
+
+      if (status === "success") {
+        banner.style.display = "block";
+        banner.className = "status-banner status-success";
+        banner.innerHTML = "✅ Pembayaran diterima! Sistem sedang memproses pengisian paket ke nomor tujuan Anda.";
+      } else if (status === "cancel") {
+        banner.style.display = "block";
+        banner.className = "status-banner status-cancel";
+        banner.innerHTML = "❌ Transaksi dibatalkan. Silakan pilih paket kembali jika ingin melanjutkan.";
+      }
+    }
+
+    // Deteksi operator otomatis berdasarkan 4 digit awal
+    function deteksiOperator(nomor) {
+      let clean = nomor.replace(/\D/g, "");
+      if (clean.startsWith("62")) clean = "0" + clean.slice(2);
+      const prefix = clean.slice(0, 4);
+
+      const mapPrefix = {
+        "TELKOMSEL": ["0811", "0812", "0813", "0821", "0822", "0823", "0852", "0853"],
+        "BYU": ["0851"],
+        "IM3": ["0814", "0815", "0816", "0855", "0856", "0857", "0858"],
+        "TRI": ["0895", "0896", "0897", "0898", "0899"],
+        "XL": ["0817", "0818", "0819", "0859", "0877", "0878"],
+        "AXIS": ["0831", "0832", "0833", "0838"],
+        "SMARTFREN": ["0881", "0882", "0883", "0884", "0885", "0886", "0887", "0888", "0889"]
+      };
+
+      for (const [op, list] of Object.entries(mapPrefix)) {
+        if (list.includes(prefix)) return op;
+      }
+      return "";
+    }
+
+    // Ambil katalog harga dari endpoint VPS (/api/katalog)
+    async function muatKatalog() {
+      const container = document.getElementById("katalog-container");
+      try {
+        const res = await fetch(`${API_BASE}/api/katalog`);
+        const json = await res.json();
+        if (json.status === "success" && Array.isArray(json.data)) {
+          semuaProduk = json.data;
+          renderKatalog(semuaProduk);
+        } else {
+          container.innerHTML = "<p>Gagal memuat katalog produk.</p>";
         }
+      } catch (err) {
+        container.innerHTML = "<p>Tidak dapat terhubung ke server katalog. Silakan muat ulang halaman.</p>";
+      }
+    }
 
-        function closeCheckout() {
-            document.getElementById('checkoutModal').classList.add('hidden');
-            document.getElementById('checkoutModal').classList.remove('flex');
+    // Tampilkan daftar produk ke layar
+    function renderKatalog(listProduk) {
+      const container = document.getElementById("katalog-container");
+      if (listProduk.length === 0) {
+        container.innerHTML = "<p>Produk untuk kategori ini sedang kosong.</p>";
+        return;
+      }
+
+      container.innerHTML = listProduk.map((item, idx) => `
+        <div class="card-produk">
+          <div>
+            <div class="provider-tag">${item.provider}</div>
+            <div class="nama-paket">${item.nama_paket}</div>
+          </div>
+          <div>
+            ${item.diskon_persen > 0 
+              ? `<div>
+                   <span class="harga-asli">Rp${item.harga_asli.toLocaleString('id-ID')}</span>
+                   <span class="diskon-tag">-${item.diskon_persen}%</span>
+                 </div>` 
+              : ''}
+            <div class="harga-jual">Rp${item.harga_jual.toLocaleString('id-ID')}</div>
+            <button 
+              class="btn-beli" 
+              id="btn-${idx}"
+              onclick="beliSekarang('${item.sku}', '${item.provider} ${item.nama_paket}', ${item.harga_jual}, 'btn-${idx}')">
+              Beli & Bayar QRIS
+            </button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // Filter otomatis saat pelanggan mengetik nomor HP
+    function filterKatalogByNomor() {
+      const nohp = document.getElementById("nohp").value;
+      const operator = deteksiOperator(nohp);
+      const infoEl = document.getElementById("info-operator");
+
+      if (operator) {
+        infoEl.innerHTML = `Operator terdeteksi: <strong>${operator}</strong>`;
+        const hasilFilter = semuaProduk.filter(p => p.provider.toUpperCase() === operator);
+        renderKatalog(hasilFilter);
+      } else {
+        infoEl.innerHTML = "Ketik nomor HP untuk mendeteksi operator secara otomatis";
+        renderKatalog(semuaProduk);
+      }
+    }
+
+    // Filter manual lewat tombol tab
+    function pilihTabOperator(operator, btnElement) {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      btnElement.classList.add("active");
+
+      if (operator === "ALL") {
+        renderKatalog(semuaProduk);
+      } else {
+        const hasil = semuaProduk.filter(p => p.provider.toUpperCase() === operator);
+        renderKatalog(hasil);
+      }
+    }
+
+    // Proses Checkout -> Kirim ke FastAPI VPS -> Redirect ke QRIS iPaymu
+    async function beliSekarang(sku, namaProduk, harga, btnId) {
+      let nohp = document.getElementById("nohp").value.replace(/\D/g, "");
+      if (nohp.startsWith("62")) nohp = "0" + nohp.slice(2);
+
+      if (nohp.length < 10) {
+        alert("Silakan masukkan Nomor HP tujuan yang valid terlebih dahulu!");
+        document.getElementById("nohp").focus();
+        return;
+      }
+
+      const btn = document.getElementById(btnId);
+      const textAsli = btn.innerText;
+      btn.disabled = true;
+      btn.innerText = "Memproses QRIS...";
+
+      try {
+        const res = await fetch(`${API_BASE}/api/ipaymu/create`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            product_code: sku,
+            product_name: namaProduk,
+            amount: harga,
+            target_phone: nohp,
+            buyer_name: "Pelanggan Web",
+            buyer_email: "cs@konterkhalil.my.id"
+          })
+        });
+
+        const data = await res.json();
+        if (data.payment_url) {
+          window.location.href = data.payment_url;
+        } else {
+          alert("Gagal membuat pembayaran: " + (data.detail || "Silakan coba lagi."));
+          btn.disabled = false;
+          btn.innerText = textAsli;
         }
+      } catch (err) {
+        alert("Gagal terhubung ke server pembayaran. Periksa koneksi internet Anda.");
+        btn.disabled = false;
+        btn.innerText = textAsli;
+      }
+    }
 
-        function generateQris(e) {
-            e.preventDefault();
-            const prodName = document.getElementById('prodNameDisplay').textContent;
-            const baseAmount = parseInt(document.getElementById('prodPrice').value);
-            const targetPhone = document.getElementById('targetPhone').value;
-            const buyerName = document.getElementById('buyerName').value;
-
-            const kodeUnik = Math.floor(Math.random() * 299) + 1;
-            const totalBayar = baseAmount + kodeUnik;
-            const invoiceId = "KK-" + Date.now().toString().slice(-6);
-
-            document.getElementById('checkoutForm').classList.add('hidden');
-            document.getElementById('resInvoice').textContent = invoiceId;
-            document.getElementById('resPhone').textContent = targetPhone;
-            document.getElementById('resTotal').textContent = 'Rp ' + totalBayar.toLocaleString('id-ID');
-
-            const waText = encodeURIComponent(
-                `Halo Admin Konter Khalil, saya sudah bayar QRIS:\n` +
-                `Invoice: ${invoiceId}\n` +
-                `Nama: ${buyerName}\n` +
-                `Produk: ${prodName}\n` +
-                `Nomor Tujuan: ${targetPhone}\n` +
-                `Total Transfer: Rp ${totalBayar.toLocaleString('id-ID')}`
-            );
-            document.getElementById('waConfirmLink').href = `https://wa.me/6281211007186?text=${waText}`;
-
-            document.getElementById('qrisResult').classList.remove('hidden');
-        }
-    </script>
-
+    // Jalankan saat halaman selesai dibuka
+    window.addEventListener("DOMContentLoaded", () => {
+      cekStatusRedirect();
+      muatKatalog();
+    });
+  </script>
 </body>
 </html>
