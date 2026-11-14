@@ -138,6 +138,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
       gap: 12px;
+      margin-bottom: 32px;
     }
     .product-card {
       background: var(--card);
@@ -179,6 +180,30 @@
       border-radius: 10px;
     }
 
+    /* Info & Kebijakan Layanan (FAQ, Refund Policy, Terms & Conditions) */
+    .info-section {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 22px;
+      border: 1px solid #e5e7eb;
+      margin-bottom: 24px;
+    }
+    .info-block { margin-bottom: 22px; }
+    .info-block:last-child { margin-bottom: 0; }
+    .info-block h2 {
+      font-size: 1.05rem;
+      color: var(--primary);
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+    .faq-item { margin-bottom: 10px; font-size: 0.88rem; }
+    .faq-item strong { display: block; color: #111827; margin-bottom: 2px; }
+    .faq-item p { color: #4b5563; }
+    .policy-list { padding-left: 18px; font-size: 0.88rem; color: #4b5563; }
+    .policy-list li { margin-bottom: 6px; }
+
+    /* Modal Checkout */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -226,8 +251,19 @@
       padding: 24px 16px 36px;
       font-size: 0.82rem;
       color: var(--muted);
+      border-top: 1px solid #e5e7eb;
+      background: #fff;
     }
-    footer a { color: var(--primary); font-weight: 700; text-decoration: none; }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .footer-links a { color: var(--primary); font-weight: 600; text-decoration: none; }
+    .footer-links a:hover { text-decoration: underline; }
+    footer a.wa-link { color: var(--primary); font-weight: 700; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -284,6 +320,49 @@
     <section class="grid" id="productGrid">
       <div class="empty-state">Memuat daftar harga produk...</div>
     </section>
+
+    <!-- Bagian Informasi Wajib: FAQ, Refund Policy, Term and Condition -->
+    <section class="info-section">
+      <div class="info-block" id="faq">
+        <h2>FAQ (Pertanyaan yang Sering Diajukan)</h2>
+        <div class="faq-item">
+          <strong>1. Bagaimana cara melakukan pembelian pulsa atau paket data?</strong>
+          <p>Masukkan nomor HP tujuan, pilih nominal pulsa atau paket data yang diinginkan, klik tombol Bayar QRIS, lalu pindai kode QRIS menggunakan aplikasi e-wallet atau mobile banking Anda.</p>
+        </div>
+        <div class="faq-item">
+          <strong>2. Berapa lama pulsa atau paket data masuk setelah pembayaran?</strong>
+          <p>Transaksi diproses secara otomatis oleh sistem dalam waktu 1 hingga 5 menit setelah pembayaran QRIS terkonfirmasi lunas.</p>
+        </div>
+        <div class="faq-item">
+          <strong>3. Metode pembayaran apa saja yang didukung?</strong>
+          <p>Pembayaran menggunakan QRIS resmi melalui payment gateway iPaymu yang mendukung DANA, OVO, GoPay, ShopeePay, LinkAja, serta seluruh Mobile Banking di Indonesia.</p>
+        </div>
+        <div class="faq-item">
+          <strong>4. Bagaimana jika pembayaran sudah berhasil tetapi produk belum masuk?</strong>
+          <p>Silakan hubungi Layanan Pelanggan (CS) kami melalui WhatsApp di 0858-2017-7770 dengan menyertakan bukti pembayaran dan nomor tujuan.</p>
+        </div>
+      </div>
+
+      <div class="info-block" id="refund-policy">
+        <h2>Refund Policy (Kebijakan Pengembalian Dana)</h2>
+        <ul class="policy-list">
+          <li>Pengembalian dana (refund) penuh 100% diberikan apabila transaksi dinyatakan <strong>GAGAL (FAILED)</strong> oleh sistem server operator setelah pembayaran lunas diterima.</li>
+          <li>Refund diproses maksimal 1x24 jam kerja ke saldo e-wallet atau rekening bank milik pembeli setelah konfirmasi ke CS WhatsApp 0858-2017-7770.</li>
+          <li>Transaksi yang sudah berstatus <strong>BERHASIL (SUCCESS)</strong> dengan nomor seri (SN) valid dari operator tidak dapat dibatalkan atau di-refund.</li>
+          <li>Kesalahan pengisian nomor HP tujuan yang dilakukan oleh pembeli bukan merupakan tanggung jawab Konter Khalil dan tidak dapat diajukan pengembalian dana.</li>
+        </ul>
+      </div>
+
+      <div class="info-block" id="terms-conditions">
+        <h2>Term and Condition (Syarat &amp; Ketentuan)</h2>
+        <ul class="policy-list">
+          <li>Dengan melakukan transaksi di Konter Khalil, pembeli dianggap telah membaca, memahami, dan menyetujui seluruh syarat dan ketentuan yang berlaku.</li>
+          <li>Pembeli wajib memastikan nomor HP tujuan dalam keadaan aktif, tidak dalam masa tenggang, dan sesuai dengan operator produk yang dipilih.</li>
+          <li>Harga produk yang tertera pada website bersifat final dan dapat berubah sewaktu-waktu mengikuti kebijakan provider telekomunikasi.</li>
+          <li>Seluruh data transaksi dicatat untuk keperluan verifikasi status pengisian dan penyelesaian kendala layanan pelanggan.</li>
+        </ul>
+      </div>
+    </section>
   </main>
 
   <div class="modal-backdrop" id="checkoutModal">
@@ -299,7 +378,7 @@
       </div>
       <div class="summary-row">
         <span>Metode Bayar</span>
-        <strong>QRIS Otomatis</strong>
+        <strong>QRIS Otomatis (iPaymu)</strong>
       </div>
       <div class="summary-row">
         <span>Total Bayar</span>
@@ -313,10 +392,16 @@
   </div>
 
   <footer>
-    <strong>Konter Khalil Digital</strong> — Layanan Top Up Pulsa & Paket Data H2H<br />
-    Metode Pembayaran Resmi: QRIS (Mendukung Dana, OVO, GoPay, ShopeePay & Mobile Banking)<br />
-    Butuh bantuan transaksi? Hubungi CS WhatsApp:
-    <a href="https://wa.me/6285820177770" target="_blank">0858-2017-7770</a>
+    <div class="footer-links">
+      <a href="#faq">FAQ</a>
+      <a href="#refund-policy">Refund Policy</a>
+      <a href="#terms-conditions">Term &amp; Condition</a>
+    </div>
+    <strong>Konter Khalil Digital</strong> — Layanan Top Up Pulsa &amp; Paket Data H2H Otomatis 24 Jam<br />
+    Alamat Usaha: Jl. Sekolah Islam No. 71, Desa Sungai Pinang, Kec. Daha Selatan, Kab. Hulu Sungai Selatan, Kalimantan Selatan<br />
+    Metode Pembayaran Resmi: QRIS via iPaymu (Dana, OVO, GoPay, ShopeePay &amp; Mobile Banking)<br />
+    Layanan Pelanggan (CS) WhatsApp:
+    <a class="wa-link" href="https://wa.me/6285820177770" target="_blank">0858-2017-7770</a>
   </footer>
 
   <script>
@@ -356,7 +441,6 @@
       return s;
     }
 
-    // Normalisasi teks pencarian: ubah "2k" -> "2000" dan hapus titik pemisah ribuan
     function normalizeText(str) {
       return String(str || "")
         .toLowerCase()
@@ -364,7 +448,6 @@
         .replace(/\b(\d+)k\b/g, "$1000");
     }
 
-    // Deteksi apakah produk termasuk Pulsa (bukan Paket Data)
     function isPulsaProduct(item) {
       const text = `${item.nama_paket || ""} ${item.sku || ""}`.toLowerCase();
       if (text.includes("pulsa")) return true;
@@ -470,7 +553,7 @@
       });
 
       if (filtered.length === 0) {
-        productGrid.innerHTML = `<div class="empty-state">Produk untuk filter ini belum tersedia (Total katalog di server: <strong>${allProducts.length}</strong> produk). Pastikan produk sudah ditambahkan di sheet <strong>DaftarHarga</strong>.</div>`;
+        productGrid.innerHTML = `<div class="empty-state">Produk untuk filter ini belum tersedia (Total katalog di server: <strong>${allProducts.length}</strong> produk).</div>`;
         return;
       }
 
