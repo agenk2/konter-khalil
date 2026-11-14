@@ -3,458 +3,535 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Konter Khalil - Top Up Pulsa & Paket Data Otomatis 24 Jam</title>
+  <title>Konter Khalil — Isi Pulsa & Paket Data Otomatis 24 Jam</title>
   <style>
     :root {
-      --primary: #0f766e;
-      --primary-dark: #115e59;
-      --bg: #f1f5f9;
+      --primary: #065f46;
+      --primary-light: #047857;
+      --bg: #f3f4f6;
       --card: #ffffff;
-      --text: #1e293b;
-      --muted: #64748b;
-      --border: #e2e8f0;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #d1d5db;
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); line-height: 1.5; }
 
     /* Header */
     header {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: white;
-      padding: 24px 16px 40px;
+      background: var(--primary);
+      color: #fff;
       text-align: center;
+      padding: 28px 16px 48px;
     }
+    header h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 6px; }
+    header p { font-size: 0.9rem; opacity: 0.9; }
 
-    header h1 {
-      font-size: 1.6rem;
-      margin-bottom: 4px;
-    }
+    /* Container */
+    .container { max-width: 820px; margin: -28px auto 32px; padding: 0 16px; }
 
-    header p {
-      font-size: 0.9rem;
-      opacity: 0.9;
-    }
-
-    /* Main Container */
-    .container {
-      max-width: 720px;
-      margin: -24px auto 32px;
-      padding: 0 16px;
-    }
-
-    /* Box Input Nomor HP */
-    .order-box {
+    /* Input Card */
+    .input-card {
       background: var(--card);
-      padding: 20px;
       border-radius: 12px;
+      padding: 20px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
-
-    .order-box label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 8px;
-      font-size: 0.95rem;
-    }
-
-    .input-group {
-      display: flex;
-      gap: 8px;
-    }
-
-    .order-box input {
+    .input-label { display: block; font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; }
+    .phone-wrap { position: relative; display: flex; align-items: center; }
+    .phone-input {
       width: 100%;
-      padding: 12px 14px;
-      font-size: 1.05rem;
-      border: 2px solid var(--border);
+      padding: 13px 44px 13px 14px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: 2px solid var(--primary);
       border-radius: 8px;
       outline: none;
-      transition: border-color 0.2s;
+      letter-spacing: 0.5px;
     }
-
-    .order-box input:focus {
-      border-color: var(--primary);
+    .clear-btn {
+      position: absolute;
+      right: 12px;
+      background: #e5e7eb;
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #374151;
+      display: none;
     }
+    .operator-info { margin-top: 8px; font-size: 0.85rem; color: var(--muted); }
+    .operator-info span { font-weight: 700; color: var(--primary); }
 
-    .operator-badge {
-      display: inline-block;
-      margin-top: 8px;
+    /* Search & Type Filter */
+    .search-box {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .search-input {
+      flex: 1;
+      min-width: 220px;
+      padding: 11px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.92rem;
+      background: #fff;
+      outline: none;
+    }
+    .search-input:focus { border-color: var(--primary); }
+
+    .type-pills { display: flex; gap: 6px; }
+    .type-pill {
+      padding: 9px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #fff;
       font-size: 0.85rem;
-      color: var(--muted);
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text);
     }
-
-    .operator-badge strong {
+    .type-pill.active {
+      background: #ecfdf5;
+      border-color: var(--primary);
       color: var(--primary);
     }
 
-    /* Filter Tabs Operator */
-    .filter-tabs {
+    /* Operator Tabs */
+    .tabs {
       display: flex;
       gap: 8px;
       overflow-x: auto;
       padding-bottom: 8px;
       margin-bottom: 16px;
+      scrollbar-width: none;
     }
-
+    .tabs::-webkit-scrollbar { display: none; }
     .tab-btn {
-      background: var(--card);
-      border: 1px solid var(--border);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      cursor: pointer;
       white-space: nowrap;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      background: #fff;
+      font-size: 0.86rem;
+      font-weight: 600;
       color: var(--text);
+      cursor: pointer;
+      transition: 0.15s;
     }
-
     .tab-btn.active {
       background: var(--primary);
-      color: white;
+      color: #fff;
       border-color: var(--primary);
-      font-weight: 600;
     }
 
-    /* Grid Katalog Produk */
-    .katalog-grid {
+    /* Product Grid */
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
       gap: 12px;
     }
-
-    .card-produk {
+    .product-card {
       background: var(--card);
-      border: 1px solid var(--border);
+      border: 1px solid #e5e7eb;
       border-radius: 10px;
       padding: 14px;
+      cursor: pointer;
+      transition: 0.15s;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.15s, box-shadow 0.15s;
     }
-
-    .card-produk:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+    .product-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 4px 10px rgba(6, 95, 70, 0.1);
+      transform: translateY(-1px);
     }
-
-    .provider-tag {
+    .badge-provider {
+      display: inline-block;
       font-size: 0.72rem;
       font-weight: 700;
-      text-transform: uppercase;
+      background: #ecfdf5;
       color: var(--primary);
-      letter-spacing: 0.5px;
-      margin-bottom: 4px;
-    }
-
-    .nama-paket {
-      font-weight: 600;
-      font-size: 0.95rem;
-      margin-bottom: 10px;
-      color: var(--text);
-    }
-
-    .harga-asli {
-      text-decoration: line-through;
-      color: #94a3b8;
-      font-size: 0.8rem;
-    }
-
-    .diskon-tag {
-      background: #dcfce7;
-      color: #15803d;
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 2px 6px;
+      padding: 2px 8px;
       border-radius: 4px;
-      margin-left: 4px;
+      margin-bottom: 6px;
+      width: fit-content;
+    }
+    .product-name { font-weight: 700; font-size: 0.96rem; margin-bottom: 10px; color: #111827; }
+    .price-row { display: flex; align-items: baseline; justify-content: space-between; margin-top: auto; }
+    .price-sell { font-size: 1.05rem; font-weight: 800; color: var(--primary); }
+    .price-orig { font-size: 0.78rem; color: #9ca3af; text-decoration: line-through; margin-right: 6px; }
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 36px 16px;
+      color: var(--muted);
+      background: #fff;
+      border-radius: 10px;
     }
 
-    .harga-jual {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--text);
-      margin: 4px 0 12px;
-    }
-
-    .btn-beli {
-      width: 100%;
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 7px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .btn-beli:hover {
-      background: var(--primary-dark);
-    }
-
-    .btn-beli:disabled {
-      background: #94a3b8;
-      cursor: not-allowed;
-    }
-
-    /* Status Alert (Saat kembali dari iPaymu) */
-    .status-banner {
+    /* Modal Checkout */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
       display: none;
-      padding: 14px;
-      border-radius: 8px;
-      margin-bottom: 16px;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 50;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: #fff;
+      border-radius: 12px;
+      max-width: 420px;
+      width: 100%;
+      padding: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+    .modal h3 { font-size: 1.1rem; margin-bottom: 12px; color: var(--primary); }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #f3f4f6;
       font-size: 0.9rem;
-      font-weight: 500;
     }
-
-    .status-success {
-      background: #dcfce7;
-      color: #166534;
-      border: 1px solid #86efac;
+    .summary-row strong { color: #111827; }
+    .modal-actions { display: flex; gap: 10px; margin-top: 18px; }
+    .btn {
+      flex: 1;
+      padding: 11px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      border: none;
     }
+    .btn-cancel { background: #e5e7eb; color: #374151; }
+    .btn-pay { background: var(--primary); color: #fff; }
+    .btn-pay:disabled { opacity: 0.6; cursor: not-allowed; }
 
-    .status-cancel {
-      background: #fee2e2;
-      color: #991b1b;
-      border: 1px solid #fca5a5;
-    }
-
-    /* Footer Merchant (Penting untuk verifikasi PG iPaymu) */
+    /* Footer */
     footer {
       text-align: center;
-      padding: 24px 16px;
-      font-size: 0.8rem;
+      padding: 24px 16px 36px;
+      font-size: 0.82rem;
       color: var(--muted);
-      border-top: 1px solid var(--border);
-      margin-top: 40px;
     }
-
-    footer a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 600;
-    }
+    footer a { color: var(--primary); font-weight: 700; text-decoration: none; }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
     <h1>Konter Khalil</h1>
     <p>Isi Pulsa & Paket Data All Operator Otomatis 24 Jam via QRIS</p>
   </header>
 
-  <div class="container">
-    <!-- NOTIFIKASI STATUS REDIRECT DARI IPAYMU -->
-    <div id="status-banner" class="status-banner"></div>
-
-    <!-- 1. INPUT NOMOR HP TUJUAN -->
-    <div class="order-box">
-      <label for="nohp">1. Masukkan Nomor HP Tujuan</label>
-      <div class="input-group">
-        <input 
-          type="tel" 
-          id="nohp" 
-          placeholder="Contoh: 081234567890" 
-          oninput="filterKatalogByNomor()" 
+  <main class="container">
+    <!-- Input Nomor HP -->
+    <section class="input-card">
+      <label class="input-label" for="phoneInput">1. Masukkan Nomor HP Tujuan</label>
+      <div class="phone-wrap">
+        <input
+          type="tel"
+          id="phoneInput"
+          class="phone-input"
+          placeholder="Contoh: 081211007186"
+          autocomplete="tel"
         />
+        <button type="button" id="clearPhone" class="clear-btn" title="Hapus nomor">&times;</button>
       </div>
-      <span id="info-operator" class="operator-badge">
-        Ketik nomor HP untuk mendeteksi operator secara otomatis
-      </span>
-    </div>
+      <div class="operator-info">
+        Operator terdeteksi: <span id="detectedOperator">Ketik nomor HP di atas</span>
+      </div>
+    </section>
 
-    <!-- FILTER MANUAL PROVIDER -->
-    <div class="filter-tabs" id="filter-tabs">
-      <button class="tab-btn active" onclick="pilihTabOperator('ALL', this)">Semua</button>
-      <button class="tab-btn" onclick="pilihTabOperator('TELKOMSEL', this)">Telkomsel</button>
-      <button class="tab-btn" onclick="pilihTabOperator('BYU', this)">by.U</button>
-      <button class="tab-btn" onclick="pilihTabOperator('IM3', this)">IM3 / Indosat</button>
-      <button class="tab-btn" onclick="pilihTabOperator('TRI', this)">Tri</button>
-      <button class="tab-btn" onclick="pilihTabOperator('XL', this)">XL</button>
-      <button class="tab-btn" onclick="pilihTabOperator('AXIS', this)">Axis</button>
-      <button class="tab-btn" onclick="pilihTabOperator('SMARTFREN', this)">Smartfren</button>
-    </div>
+    <!-- Pencarian & Filter Jenis -->
+    <section class="search-box">
+      <input
+        type="text"
+        id="searchInput"
+        class="search-input"
+        placeholder="Cari pulsa atau paket data (misal: pulsa 10, 10 gb)..."
+      />
+      <div class="type-pills" id="typePills">
+        <button type="button" class="type-pill active" data-type="ALL">Semua</button>
+        <button type="button" class="type-pill" data-type="PULSA">Pulsa</button>
+        <button type="button" class="type-pill" data-type="DATA">Paket Data</button>
+      </div>
+    </section>
 
-    <!-- 2. WADAH KATALOG PRODUK -->
-    <div id="katalog-container" class="katalog-grid">
-      <p>Memuat daftar harga terbaru...</p>
+    <!-- Tab Operator -->
+    <section class="tabs" id="operatorTabs">
+      <button type="button" class="tab-btn active" data-op="ALL">Semua</button>
+      <button type="button" class="tab-btn" data-op="TELKOMSEL">Telkomsel</button>
+      <button type="button" class="tab-btn" data-op="BYU">by.U</button>
+      <button type="button" class="tab-btn" data-op="INDOSAT">IM3 / Indosat</button>
+      <button type="button" class="tab-btn" data-op="TRI">Tri</button>
+      <button type="button" class="tab-btn" data-op="XL">XL</button>
+      <button type="button" class="tab-btn" data-op="AXIS">Axis</button>
+      <button type="button" class="tab-btn" data-op="SMARTFREN">Smartfren</button>
+    </section>
+
+    <!-- Daftar Produk -->
+    <section class="grid" id="productGrid">
+      <div class="empty-state">Memuat daftar harga produk...</div>
+    </section>
+  </main>
+
+  <!-- Modal Konfirmasi Pembayaran -->
+  <div class="modal-backdrop" id="checkoutModal">
+    <div class="modal">
+      <h3>Konfirmasi Pesanan</h3>
+      <div class="summary-row">
+        <span>Nomor Tujuan</span>
+        <strong id="modalPhone">-</strong>
+      </div>
+      <div class="summary-row">
+        <span>Produk</span>
+        <strong id="modalProduct">-</strong>
+      </div>
+      <div class="summary-row">
+        <span>Metode Bayar</span>
+        <strong>QRIS Otomatis</strong>
+      </div>
+      <div class="summary-row">
+        <span>Total Bayar</span>
+        <strong id="modalPrice" style="color: var(--primary); font-size: 1.05rem;">-</strong>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-cancel" id="closeModalBtn">Batal</button>
+        <button type="button" class="btn btn-pay" id="confirmPayBtn">Bayar QRIS</button>
+      </div>
     </div>
   </div>
 
-  <!-- FOOTER INFORMASI LAYANAN -->
   <footer>
-    <p><strong>Konter Khalil Digital</strong> — Layanan Top Up Pulsa & Paket Data H2H</p>
-    <p>Metode Pembayaran Resmi: QRIS (Mendukung Dana, OVO, GoPay, ShopeePay & Mobile Banking)</p>
-    <p style="margin-top: 6px;">
-      Butuh bantuan transaksi? Hubungi CS WhatsApp: 
-      <a href="https://wa.me/6285820177770" target="_blank">0858-2017-7770</a>
-    </p>
+    <strong>Konter Khalil Digital</strong> — Layanan Top Up Pulsa & Paket Data H2H<br />
+    Metode Pembayaran Resmi: QRIS (Mendukung Dana, OVO, GoPay, ShopeePay & Mobile Banking)<br />
+    Butuh bantuan transaksi? Hubungi CS WhatsApp:
+    <a href="https://wa.me/6285820177770" target="_blank">0858-2017-7770</a>
   </footer>
 
-  <!-- 3. SCRIPT PENGAMBIL KATALOG & CHECKOUT IPAYMU -->
   <script>
     const API_BASE = "https://h2h.konterkhalil.my.id";
-    let semuaProduk = [];
+    let allProducts = [];
+    let selectedOperator = "ALL";
+    let selectedType = "ALL";
+    let searchQuery = "";
+    let selectedItem = null;
 
-    // Cek parameter URL setelah kembali dari halaman pembayaran iPaymu
-    function cekStatusRedirect() {
-      const params = new URLSearchParams(window.location.search);
-      const status = params.get("status");
-      const banner = document.getElementById("status-banner");
+    const phoneInput = document.getElementById("phoneInput");
+    const clearPhoneBtn = document.getElementById("clearPhone");
+    const detectedOpEl = document.getElementById("detectedOperator");
+    const searchInput = document.getElementById("searchInput");
+    const productGrid = document.getElementById("productGrid");
 
-      if (status === "success") {
-        banner.style.display = "block";
-        banner.className = "status-banner status-success";
-        banner.innerHTML = "✅ Pembayaran diterima! Sistem sedang memproses pengisian paket ke nomor tujuan Anda.";
-      } else if (status === "cancel") {
-        banner.style.display = "block";
-        banner.className = "status-banner status-cancel";
-        banner.innerHTML = "❌ Transaksi dibatalkan. Silakan pilih paket kembali jika ingin melanjutkan.";
-      }
+    // Prefix Operator Indonesia
+    const PREFIX_MAP = [
+      { op: "TELKOMSEL", label: "TELKOMSEL", prefixes: ["0811", "0812", "0813", "0821", "0822", "0823", "0852", "0853"] },
+      { op: "BYU", label: "by.U", prefixes: ["0851"] },
+      { op: "INDOSAT", label: "IM3 / INDOSAT", prefixes: ["0814", "0815", "0816", "0855", "0856", "0857", "0858"] },
+      { op: "TRI", label: "TRI (3)", prefixes: ["0895", "0896", "0897", "0898", "0899"] },
+      { op: "XL", label: "XL AXIATA", prefixes: ["0817", "0818", "0819", "0859", "0877", "0878"] },
+      { op: "AXIS", label: "AXIS", prefixes: ["0831", "0832", "0833", "0838"] },
+      { op: "SMARTFREN", label: "SMARTFREN", prefixes: ["0881", "0882", "0883", "0884", "0885", "0886", "0887", "0888", "0889"] }
+    ];
+
+    function normalizeProvider(raw) {
+      const s = String(raw || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+      if (s.includes("TELKOMSEL") || s.includes("TSEL") || s.includes("SIMPATI") || s.includes("AS")) return "TELKOMSEL";
+      if (s.includes("BYU")) return "BYU";
+      if (s.includes("INDOSAT") || s.includes("IM3") || s.includes("ISAT")) return "INDOSAT";
+      if (s === "TRI" || s === "THREE" || s === "3") return "TRI";
+      if (s.includes("AXIS")) return "AXIS";
+      if (s.includes("XL")) return "XL";
+      if (s.includes("SMART")) return "SMARTFREN";
+      return s;
     }
 
-    // Deteksi operator otomatis berdasarkan 4 digit awal
-    function deteksiOperator(nomor) {
-      let clean = nomor.replace(/\D/g, "");
-      if (clean.startsWith("62")) clean = "0" + clean.slice(2);
-      const prefix = clean.slice(0, 4);
-
-      const mapPrefix = {
-        "TELKOMSEL": ["0811", "0812", "0813", "0821", "0822", "0823", "0852", "0853"],
-        "BYU": ["0851"],
-        "IM3": ["0814", "0815", "0816", "0855", "0856", "0857", "0858"],
-        "TRI": ["0895", "0896", "0897", "0898", "0899"],
-        "XL": ["0817", "0818", "0819", "0859", "0877", "0878"],
-        "AXIS": ["0831", "0832", "0833", "0838"],
-        "SMARTFREN": ["0881", "0882", "0883", "0884", "0885", "0886", "0887", "0888", "0889"]
-      };
-
-      for (const [op, list] of Object.entries(mapPrefix)) {
-        if (list.includes(prefix)) return op;
-      }
-      return "";
+    function formatRupiah(num) {
+      return "Rp " + Number(num || 0).toLocaleString("id-ID");
     }
 
-    // Ambil katalog harga dari endpoint VPS (/api/katalog)
-    async function muatKatalog() {
-      const container = document.getElementById("katalog-container");
+    // Ambil katalog dari VPS
+    async function loadCatalog() {
       try {
         const res = await fetch(`${API_BASE}/api/katalog`);
         const json = await res.json();
         if (json.status === "success" && Array.isArray(json.data)) {
-          semuaProduk = json.data;
-          renderKatalog(semuaProduk);
+          allProducts = json.data;
+          renderProducts();
         } else {
-          container.innerHTML = "<p>Gagal memuat katalog produk.</p>";
+          productGrid.innerHTML = `<div class="empty-state">Gagal memuat daftar produk. Silakan muat ulang halaman.</div>`;
         }
       } catch (err) {
-        container.innerHTML = "<p>Tidak dapat terhubung ke server katalog. Silakan muat ulang halaman.</p>";
+        productGrid.innerHTML = `<div class="empty-state">Koneksi ke server terputus. Coba beberapa saat lagi.</div>`;
       }
     }
 
-    // Tampilkan daftar produk ke layar
-    function renderKatalog(listProduk) {
-      const container = document.getElementById("katalog-container");
-      if (listProduk.length === 0) {
-        container.innerHTML = "<p>Produk untuk kategori ini sedang kosong.</p>";
+    function setActiveOperatorTab(op) {
+      selectedOperator = op;
+      document.querySelectorAll("#operatorTabs .tab-btn").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.op === op);
+      });
+      renderProducts();
+    }
+
+    // Deteksi nomor HP otomatis
+    phoneInput.addEventListener("input", () => {
+      let val = phoneInput.value.replace(/\D/g, "");
+      if (val.startsWith("62")) val = "0" + val.slice(2);
+      phoneInput.value = val;
+      clearPhoneBtn.style.display = val.length > 0 ? "block" : "none";
+
+      if (val.length >= 4) {
+        const prefix4 = val.slice(0, 4);
+        const found = PREFIX_MAP.find((item) => item.prefixes.includes(prefix4));
+        if (found) {
+          detectedOpEl.textContent = found.label;
+          setActiveOperatorTab(found.op);
+          return;
+        }
+      }
+      detectedOpEl.textContent = val.length > 0 ? "Operator tidak dikenal" : "Ketik nomor HP di atas";
+    });
+
+    clearPhoneBtn.addEventListener("click", () => {
+      phoneInput.value = "";
+      clearPhoneBtn.style.display = "none";
+      detectedOpEl.textContent = "Ketik nomor HP di atas";
+      setActiveOperatorTab("ALL");
+      phoneInput.focus();
+    });
+
+    // Pencarian teks real-time
+    searchInput.addEventListener("input", (e) => {
+      searchQuery = e.target.value.trim().toLowerCase();
+      renderProducts();
+    });
+
+    // Filter jenis (Semua / Pulsa / Paket Data)
+    document.getElementById("typePills").addEventListener("click", (e) => {
+      const btn = e.target.closest(".type-pill");
+      if (!btn) return;
+      selectedType = btn.dataset.type;
+      document.querySelectorAll("#typePills .type-pill").forEach((el) => el.classList.remove("active"));
+      btn.classList.add("active");
+      renderProducts();
+    });
+
+    // Klik Tab Operator
+    document.getElementById("operatorTabs").addEventListener("click", (e) => {
+      const btn = e.target.closest(".tab-btn");
+      if (!btn) return;
+      setActiveOperatorTab(btn.dataset.op);
+    });
+
+    // Render kartu produk
+    function renderProducts() {
+      const filtered = allProducts.filter((item) => {
+        const normOp = normalizeProvider(item.provider);
+        const nameLower = String(item.nama_paket || "").toLowerCase();
+        const skuLower = String(item.sku || "").toLowerCase();
+        const priceStr = String(item.harga_jual || "");
+
+        // Filter operator
+        if (selectedOperator !== "ALL" && normOp !== selectedOperator) return false;
+
+        // Filter Pulsa vs Paket Data
+        const isPulsa = nameLower.includes("pulsa") || skuLower.startsWith("p");
+        if (selectedType === "PULSA" && !isPulsa) return false;
+        if (selectedType === "DATA" && isPulsa) return false;
+
+        // Filter kata kunci pencarian
+        if (searchQuery) {
+          const matchText =
+            nameLower.includes(searchQuery) ||
+            skuLower.includes(searchQuery) ||
+            normOp.toLowerCase().includes(searchQuery) ||
+            priceStr.includes(searchQuery);
+          if (!matchText) return false;
+        }
+
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        productGrid.innerHTML = `<div class="empty-state">Produk tidak ditemukan. Coba ubah kata kunci pencarian atau pilih tab <strong>Semua</strong>.</div>`;
         return;
       }
 
-      container.innerHTML = listProduk.map((item, idx) => `
-        <div class="card-produk">
-          <div>
-            <div class="provider-tag">${item.provider}</div>
-            <div class="nama-paket">${item.nama_paket}</div>
-          </div>
-          <div>
-            ${item.diskon_persen > 0 
-              ? `<div>
-                   <span class="harga-asli">Rp${item.harga_asli.toLocaleString('id-ID')}</span>
-                   <span class="diskon-tag">-${item.diskon_persen}%</span>
-                 </div>` 
-              : ''}
-            <div class="harga-jual">Rp${item.harga_jual.toLocaleString('id-ID')}</div>
-            <button 
-              class="btn-beli" 
-              id="btn-${idx}"
-              onclick="beliSekarang('${item.sku}', '${item.provider} ${item.nama_paket}', ${item.harga_jual}, 'btn-${idx}')">
-              Beli & Bayar QRIS
-            </button>
-          </div>
-        </div>
-      `).join("");
+      productGrid.innerHTML = filtered
+        .map((item, idx) => {
+          const hasDiscount = Number(item.diskon_persen || 0) > 0 && Number(item.harga_asli) > Number(item.harga_jual);
+          return `
+            <div class="product-card" onclick="openCheckout('${item.sku}')">
+              <div>
+                <span class="badge-provider">${item.provider}</span>
+                <div class="product-name">${item.nama_paket}</div>
+              </div>
+              <div class="price-row">
+                <div>
+                  ${hasDiscount ? `<span class="price-orig">${formatRupiah(item.harga_asli)}</span>` : ""}
+                  <span class="price-sell">${formatRupiah(item.harga_jual)}</span>
+                </div>
+              </div>
+            </div>
+          `;
+        })
+        .join("");
     }
 
-    // Filter otomatis saat pelanggan mengetik nomor HP
-    function filterKatalogByNomor() {
-      const nohp = document.getElementById("nohp").value;
-      const operator = deteksiOperator(nohp);
-      const infoEl = document.getElementById("info-operator");
-
-      if (operator) {
-        infoEl.innerHTML = `Operator terdeteksi: <strong>${operator}</strong>`;
-        const hasilFilter = semuaProduk.filter(p => p.provider.toUpperCase() === operator);
-        renderKatalog(hasilFilter);
-      } else {
-        infoEl.innerHTML = "Ketik nomor HP untuk mendeteksi operator secara otomatis";
-        renderKatalog(semuaProduk);
-      }
-    }
-
-    // Filter manual lewat tombol tab
-    function pilihTabOperator(operator, btnElement) {
-      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-      btnElement.classList.add("active");
-
-      if (operator === "ALL") {
-        renderKatalog(semuaProduk);
-      } else {
-        const hasil = semuaProduk.filter(p => p.provider.toUpperCase() === operator);
-        renderKatalog(hasil);
-      }
-    }
-
-    // Proses Checkout -> Kirim ke FastAPI VPS -> Redirect ke QRIS iPaymu
-    async function beliSekarang(sku, namaProduk, harga, btnId) {
-      let nohp = document.getElementById("nohp").value.replace(/\D/g, "");
-      if (nohp.startsWith("62")) nohp = "0" + nohp.slice(2);
-
-      if (nohp.length < 10) {
-        alert("Silakan masukkan Nomor HP tujuan yang valid terlebih dahulu!");
-        document.getElementById("nohp").focus();
+    // Buka Modal Checkout
+    window.openCheckout = function (sku) {
+      const phone = phoneInput.value.trim();
+      if (phone.length < 10) {
+        alert("Silakan masukkan nomor HP tujuan yang valid terlebih dahulu (minimal 10 digit).");
+        phoneInput.focus();
         return;
       }
 
-      const btn = document.getElementById(btnId);
-      const textAsli = btn.innerText;
-      btn.disabled = true;
-      btn.innerText = "Memproses QRIS...";
+      selectedItem = allProducts.find((p) => p.sku === sku);
+      if (!selectedItem) return;
+
+      document.getElementById("modalPhone").textContent = phone;
+      document.getElementById("modalProduct").textContent = `${selectedItem.provider} — ${selectedItem.nama_paket}`;
+      document.getElementById("modalPrice").textContent = formatRupiah(selectedItem.harga_jual);
+      document.getElementById("checkoutModal").classList.add("open");
+    };
+
+    document.getElementById("closeModalBtn").addEventListener("click", () => {
+      document.getElementById("checkoutModal").classList.remove("open");
+    });
+
+    // Proses buat QRIS iPaymu
+    document.getElementById("confirmPayBtn").addEventListener("click", async () => {
+      if (!selectedItem) return;
+      const payBtn = document.getElementById("confirmPayBtn");
+      payBtn.disabled = true;
+      payBtn.textContent = "Membuat QRIS...";
 
       try {
         const res = await fetch(`${API_BASE}/api/ipaymu/create`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            product_code: sku,
-            product_name: namaProduk,
-            amount: harga,
-            target_phone: nohp,
-            buyer_name: "Pelanggan Web",
-            buyer_email: "cs@konterkhalil.my.id"
+            product_code: selectedItem.sku,
+            product_name: `${selectedItem.provider} ${selectedItem.nama_paket}`,
+            amount: Number(selectedItem.harga_jual),
+            target_phone: phoneInput.value.trim(),
+            buyer_name: "Pelanggan Konter Khalil",
+            buyer_email: "order@konterkhalil.my.id"
           })
         });
 
@@ -462,22 +539,17 @@
         if (data.payment_url) {
           window.location.href = data.payment_url;
         } else {
-          alert("Gagal membuat pembayaran: " + (data.detail || "Silakan coba lagi."));
-          btn.disabled = false;
-          btn.innerText = textAsli;
+          alert(data.detail || "Gagal membuat pembayaran QRIS. Silakan coba lagi.");
         }
       } catch (err) {
-        alert("Gagal terhubung ke server pembayaran. Periksa koneksi internet Anda.");
-        btn.disabled = false;
-        btn.innerText = textAsli;
+        alert("Terjadi gangguan koneksi saat membuat pembayaran.");
+      } finally {
+        payBtn.disabled = false;
+        payBtn.textContent = "Bayar QRIS";
       }
-    }
-
-    // Jalankan saat halaman selesai dibuka
-    window.addEventListener("DOMContentLoaded", () => {
-      cekStatusRedirect();
-      muatKatalog();
     });
+
+    loadCatalog();
   </script>
 </body>
 </html>
